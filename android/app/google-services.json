@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "958965371682",
+    "project_id": "icthelpdesk-e864f",
+    "storage_bucket": "icthelpdesk-e864f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958965371682:android:25598f9b8bdc986aed4b7b",
+        "android_client_info": {
+          "package_name": "com.example.ict_help_desk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLyv_CcQ19IB6-uZKe2qCPfNcIM329eUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958965371682:android:73f0dc4bc5c0eed9ed4b7b",
+        "android_client_info": {
+          "package_name": "com.example.kizingi_ict_help_deskv3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLyv_CcQ19IB6-uZKe2qCPfNcIM329eUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
