@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'list_of_issues_admin.dart';
 import 'login.dart';
 import 'tech_chart_bot.dart';
 import 'tech_issue_view.dart';
 import 'tech_view_users.dart';
-import 'technician_list.dart';
 
 class TechnicianHome extends StatelessWidget {
   const TechnicianHome({super.key});

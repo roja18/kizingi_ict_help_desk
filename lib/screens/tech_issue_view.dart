@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'issue_detail.dart';
 import 'tech_issue_detail.dart';
 
 class TechListIssuesPage extends StatefulWidget {

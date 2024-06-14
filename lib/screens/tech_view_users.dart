@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'technician.dart';
 
 class ListOfUsers extends StatefulWidget {
   const ListOfUsers({super.key});
