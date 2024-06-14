@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
+import 'admin_chat_bot.dart';
 import 'list_of_issues_admin.dart';
 import 'login.dart';
-import 'technician.dart';
 import 'technician_list.dart';
 
 class AdminHome extends StatelessWidget {
@@ -19,7 +18,7 @@ class AdminHome extends StatelessWidget {
         Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(color: Colors.lightBlue),
+          decoration: const BoxDecoration(color: Colors.lightBlue),
           child: const Padding(
             padding: EdgeInsets.only(top: 100.0, left: 22.0),
             child: Column(
@@ -56,7 +55,7 @@ class AdminHome extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.only(top: 40, left: 5.0, right: 5.0),
+              padding: const EdgeInsets.only(top: 40, left: 5.0, right: 5.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -114,24 +113,32 @@ class AdminHome extends StatelessWidget {
                             const SizedBox(
                               width: 16,
                             ),
-                            Column(
-                              children: [
-                                Card(
-                                  child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
-                                      height: 200,
-                                      width: 150,
-                                      child: Image.asset('image/smss.png')),
-                                ),
-                                const Text(
-                                  'Chart Assistance',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.lightBlue),
-                                )
-                              ],
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AdminChatBot()));
+                              },
+                              child: Column(
+                                children: [
+                                  Card(
+                                    child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        height: 200,
+                                        width: 150,
+                                        child: Image.asset('image/smss.png')),
+                                  ),
+                                  const Text(
+                                    'Chart Assistance',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.lightBlue),
+                                  )
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -168,7 +175,7 @@ class AdminHome extends StatelessWidget {
                                     ),
                                   ),
                                   const Text(
-                                    'Technicians',
+                                    'Users',
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,

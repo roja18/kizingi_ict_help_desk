@@ -51,6 +51,7 @@ TextFormField reusableTextFild(String text, IconData icon, bool isPasswordType,
               }
               return null;
             }
+            return null;
           },
     controller: controller,
     obscureText: isPasswordType,
@@ -59,7 +60,7 @@ TextFormField reusableTextFild(String text, IconData icon, bool isPasswordType,
     // autovalidateMode: AutovalidateMode.onUserInteraction,
     autocorrect: !isPasswordType,
     cursorColor: Colors.black,
-    style: TextStyle(color: Color.fromARGB(255, 4, 56, 145).withOpacity(0.9)),
+    style: TextStyle(color: const Color.fromARGB(255, 4, 56, 145).withOpacity(0.9)),
     decoration: InputDecoration(
       prefixIcon: Icon(
         icon,
@@ -93,11 +94,6 @@ Container signInSignoutbutton(
       onPressed: () {
         onTap();
       },
-      child: Text(
-        isLogin ? 'LOGIN' : 'REGSTER',
-        style: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-      ),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.pressed)) {
@@ -107,6 +103,11 @@ Container signInSignoutbutton(
         }),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+      ),
+      child: Text(
+        isLogin ? 'LOGIN' : 'REGSTER',
+        style: const TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
       ),
     ),
   );
@@ -123,10 +124,6 @@ Container mybutton(
       onPressed: () {
         onTap();
       },
-      child: Text(text,
-        style: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-      ),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.pressed)) {
@@ -136,6 +133,10 @@ Container mybutton(
         }),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+      ),
+      child: Text(text,
+        style: const TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
       ),
     ),
   );
@@ -157,7 +158,7 @@ class ReusableTextareaFild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.blueGrey[100],
         borderRadius: BorderRadius.circular(10),
@@ -169,7 +170,7 @@ class ReusableTextareaFild extends StatelessWidget {
         keyboardType: TextInputType.multiline, // Enable multiline input
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey),
+          hintStyle: const TextStyle(color: Colors.grey),
           border: InputBorder.none,
           icon: Icon(icon, color: Colors.lightBlue),
         ),
@@ -197,7 +198,7 @@ class ReusableDropdownField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.blueGrey[100],
         borderRadius: BorderRadius.circular(10),
@@ -208,10 +209,10 @@ class ReusableDropdownField extends StatelessWidget {
           hint: Row(
             children: [
               Icon(icon, color: Colors.lightBlue),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 hintText,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
             ],
           ),
@@ -222,7 +223,7 @@ class ReusableDropdownField extends StatelessWidget {
             );
           }).toList(),
           onChanged: onChanged,
-          icon: Icon(Icons.arrow_drop_down),
+          icon: const Icon(Icons.arrow_drop_down),
         ),
       ),
     );

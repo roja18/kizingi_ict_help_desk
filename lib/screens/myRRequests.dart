@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'component/my_drawer.dart';
+import 'component/reusable_widget.dart';
 
 class MyRequests extends StatefulWidget {
   const MyRequests({super.key});
@@ -12,6 +13,7 @@ class MyRequests extends StatefulWidget {
 
 class _MyRequestsState extends State<MyRequests> {
   User? user;
+  String selectedCategory = '';
 
   @override
   void initState() {
@@ -34,26 +36,58 @@ class _MyRequestsState extends State<MyRequests> {
     }
   }
 
+  void _showCommentDialog(BuildContext context, String documentId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Please rate the service'),
+          content: ReusableDropdownField(
+            hintText: 'Select satification class',
+            icon: Icons.category,
+            items: ['Excellent', 'Very Good', 'Good', 'Normal', 'Bald'],
+            selectedItem: selectedCategory,
+            onChanged: (value) {
+              setState(() {
+                selectedCategory = value ?? '';
+              });
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                // Update the Firestore document with the entered comment
+                await FirebaseFirestore.instance
+                    .collection('requests')
+                    .doc(documentId)
+                    .update({'feedback': selectedCategory, 'status': 'Done'});
+
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          'Home',
+          'ICT Help Respond',
           style: TextStyle(color: Colors.lightBlue),
         ),
         elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications_none,
-              color: Colors.lightBlue,
-              size: 30,
-            ),
-          ),
-        ],
       ),
       drawer: MyDrawer(),
       body: SingleChildScrollView(
@@ -119,12 +153,32 @@ class _MyRequestsState extends State<MyRequests> {
                     return Column(
                       children: requests.map((doc) {
                         var data = doc.data() as Map<String, dynamic>;
+                        String documentId = doc.id;
+                        var tileColor = data['feedback'] == null
+                            ? getPriorityColor(data['priority'])
+                            : Colors.white;
                         return Card(
-                          color: getPriorityColor(data['priority']),
+                          color: tileColor,
                           child: ListTile(
                             title: Text(data['title']),
-                            subtitle: Text(data['description']),
-                            trailing: Text(data['priority']),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data['description']),
+                                Text(
+                                  'Do this: ${data['comment']}',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Divider(),
+                                Text(data['status'])
+                              ],
+                            ),
+                            trailing: IconButton(
+                              onPressed: () {
+                                _showCommentDialog(context, documentId);
+                              },
+                              icon: Icon(Icons.feedback),
+                            ),
                           ),
                         );
                       }).toList(),

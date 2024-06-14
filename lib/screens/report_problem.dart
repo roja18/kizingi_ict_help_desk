@@ -5,21 +5,17 @@ import 'package:flutter/material.dart';
 import 'component/my_drawer.dart';
 import 'component/reusable_widget.dart';
 
-class IssuesPage extends StatefulWidget {
-  const IssuesPage({super.key});
+class ReportProblem extends StatefulWidget {
+  const ReportProblem({super.key});
 
   @override
-  State<IssuesPage> createState() => _IssuesPageState();
+  State<ReportProblem> createState() => _ReportProblemState();
 }
 
-class _IssuesPageState extends State<IssuesPage> {
-  final TextEditingController _titleController = TextEditingController();
+class _ReportProblemState extends State<ReportProblem> {
+  final TextEditingController _problemController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _officeController = TextEditingController();
-  String selectedCategory = '';
   String selectedPriority = '';
-  String selectedDeviceType = '';
-  String selectedOS = '';
   User? userCredential;
 
   @override
@@ -38,41 +34,31 @@ class _IssuesPageState extends State<IssuesPage> {
     }
 
     // Gather all the data
-    String title = _titleController.text;
+    String title = _problemController.text;
     String description = _descriptionController.text;
-    String office = _officeController.text;
 
     // Create a map of the data
     Map<String, dynamic> requestData = {
       'title': title,
       'description': description,
-      'office': office,
-      'category': selectedCategory,
       'priority': selectedPriority,
-      'deviceType': selectedDeviceType,
-      'operatingSystem': selectedOS,
-      'timestamp': FieldValue.serverTimestamp(), // Add a timestamp
       'userId': userCredential!.uid,
       'status': 'processing',
     };
 
     // Send the data to Firestore
-    await FirebaseFirestore.instance.collection('requests').add(requestData);
+    await FirebaseFirestore.instance.collection('problems').add(requestData);
 
     // Optionally, show a confirmation message
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Support request submitted successfully')),
+      SnackBar(content: Text('Problem report submitted successfully')),
     );
 
     // Clear the form
-    _titleController.clear();
+    _problemController.clear();
     _descriptionController.clear();
-    _officeController.clear();
     setState(() {
-      selectedCategory = '';
       selectedPriority = '';
-      selectedDeviceType = '';
-      selectedOS = '';
     });
   }
 
@@ -82,7 +68,7 @@ class _IssuesPageState extends State<IssuesPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: const Text(
-            'ICT Help Issues',
+            'ICT Help Problems',
             style: TextStyle(color: Colors.lightBlue),
           ),
           elevation: 0,
@@ -97,7 +83,7 @@ class _IssuesPageState extends State<IssuesPage> {
               height: 180,
               decoration: BoxDecoration(
                 image: const DecorationImage(
-                  image: AssetImage('image/hel.jpg'),
+                  image: AssetImage('image/desk.png'),
                   fit: BoxFit.cover, // Set fit to cover the entire container
                 ),
                 color: Colors.white,
@@ -122,7 +108,7 @@ class _IssuesPageState extends State<IssuesPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Report You Issue',
+                  'Report a Problem',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -137,24 +123,12 @@ class _IssuesPageState extends State<IssuesPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  reusableTextFild("Enter Issue Title", Icons.title, false,
-                      _titleController),
-                  const SizedBox(height: 15),
-                  ReusableDropdownField(
-                    hintText: 'Select the type of issue',
-                    icon: Icons.category,
-                    items: ['Hardware', 'Software', 'Networkig', 'Other'],
-                    selectedItem: selectedCategory,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedCategory = value ?? '';
-                      });
-                    },
-                  ),
+                  reusableTextFild(
+                      "Enter Problem", Icons.title, false, _problemController),
                   const SizedBox(height: 15),
                   ReusableTextareaFild(
                     controller: _descriptionController,
-                    hintText: 'Type here Description of you issue...',
+                    hintText: 'Type here Description of the problem...',
                     icon: Icons.edit,
                     isPasswordType: false,
                   ),
@@ -170,35 +144,8 @@ class _IssuesPageState extends State<IssuesPage> {
                       });
                     },
                   ),
-                  const SizedBox(height: 15),
-                  ReusableDropdownField(
-                    hintText: 'Select Device Type',
-                    icon: Icons.devices,
-                    items: ['Laptop', 'Desktop', 'Mobile', 'Tablet'],
-                    selectedItem: selectedDeviceType,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedDeviceType = value ?? '';
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  ReusableDropdownField(
-                    hintText: 'Select Operating System',
-                    icon: Icons.computer,
-                    items: ['Windows', 'macOS', 'Linux', 'iOS', 'Android'],
-                    selectedItem: selectedOS,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedOS = value ?? '';
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  reusableTextFild("Enter Name of Your Office", Icons.warehouse,
-                      false, _officeController),
                   const SizedBox(height: 10),
-                  mybutton(context, "Request Support", () {
+                  mybutton(context, "Report Problem", () {
                     _requestSupport();
                   }),
                 ],

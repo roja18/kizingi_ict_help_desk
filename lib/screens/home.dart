@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kizingi_ict_help_deskv3/screens/other_assistance.dart';
 
+import 'chart_boat_assistance.dart';
 import 'component/my_drawer.dart';
 import 'issue.dart';
+import 'report_problem.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,20 +22,10 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: const Text(
-            'Home',
+            'Home ',
             style: TextStyle(color: Colors.lightBlue),
           ),
           elevation: 0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notifications_none,
-                color: Colors.lightBlue,
-                size: 30,
-              ),
-            )
-          ],
         ),
         drawer: MyDrawer(),
         body: SingleChildScrollView(
@@ -128,24 +122,32 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     width: 16,
                   ),
-                  Column(
-                    children: [
-                      Card(
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            height: 200,
-                            width: 150,
-                            child: Image.asset('image/smss.png')),
-                      ),
-                      const Text(
-                        'Chart Assistance',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightBlue),
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChartBort()));
+                    },
+                    child: Column(
+                      children: [
+                        Card(
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              height: 200,
+                              width: 150,
+                              child: Image.asset('image/smss.png')),
+                        ),
+                        const Text(
+                          'Chart Assistance',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.lightBlue),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -159,52 +161,68 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Card(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ReportProblem()));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Card(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            height: 200,
+                            width: 150,
+                            child: Image.asset('image/problem.png'),
                           ),
-                          height: 200,
-                          width: 150,
-                          child: Image.asset('image/problem.png'),
                         ),
-                      ),
-                      const Text(
-                        'Report Problem',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightBlue),
-                      )
-                    ],
+                        const Text(
+                          'Report Problem',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.lightBlue),
+                        )
+                      ],
+                    ),
                   ),
                   const SizedBox(width: 16), // Adding space between the columns
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Card(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OtherAssistance()));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Card(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            height: 200,
+                            width: 150,
+                            child: Image.asset('image/request.png'),
                           ),
-                          height: 200,
-                          width: 150,
-                          child: Image.asset('image/request.png'),
                         ),
-                      ),
-                      const Text(
-                        'Other Assistance',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightBlue),
-                      )
-                    ],
+                        const Text(
+                          'Other Assistance',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.lightBlue),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),

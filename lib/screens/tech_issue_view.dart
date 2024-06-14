@@ -77,7 +77,7 @@ class _TechListIssuesPageState extends State<TechListIssuesPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Technician Registration Form',
+                        'User Technical Request',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -110,12 +110,15 @@ class _TechListIssuesPageState extends State<TechListIssuesPage> {
                                 children: requests.map((doc) {
                                   var data = doc.data() as Map<String, dynamic>;
                                   var documentId = doc.id; // Get document ID
+                                  var tileColor = data['feedback'] == null
+                                      ? getPriorityColor(data['priority'])
+                                      : Colors.white;
                                   return Card(
-                                    color: getPriorityColor(data['priority']),
+                                    color: tileColor,
                                     child: ListTile(
                                       title: Text(data['title']),
                                       subtitle: Text(data['description']),
-                                      trailing: Text(data['priority']),
+                                      trailing: Text(data['status']),
                                       onTap: () {
                                         Navigator.push(
                                           context,

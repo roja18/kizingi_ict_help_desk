@@ -76,7 +76,7 @@ class _ListIssuesPageState extends State<ListIssuesPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Technician Registration Form',
+                        'Technical Request List',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -109,12 +109,24 @@ class _ListIssuesPageState extends State<ListIssuesPage> {
                                 children: requests.map((doc) {
                                   var data = doc.data() as Map<String, dynamic>;
                                   var documentId = doc.id; // Get document ID
+                                  var tileColor = data['feedback'] == null
+                                      ? getPriorityColor(data['priority'])
+                                      : Colors.white;
                                   return Card(
-                                    color: getPriorityColor(data['priority']),
+                                    color: tileColor,
                                     child: ListTile(
                                       title: Text(data['title']),
-                                      subtitle: Text(data['description']),
-                                      trailing: Text(data['priority']),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(data['description']),
+                                          Divider(),
+                                          Text(
+                                              'Level of certification: ${data['feedback']}'),
+                                        ],
+                                      ),
+                                      trailing: Text(data['status']),
                                       onTap: () {
                                         Navigator.push(
                                           context,

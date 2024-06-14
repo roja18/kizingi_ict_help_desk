@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kizingi_ict_help_deskv3/screens/login.dart';
 
+import '../home.dart';
 import '../myRRequests.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -25,9 +26,12 @@ class MyDrawer extends StatelessWidget {
           //   onTap: () {},
           // ),
           ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: const Text('Profile'),
-            onTap: () {},
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.support_agent),
@@ -37,11 +41,11 @@ class MyDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => MyRequests()));
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.settings),
+          //   title: const Text('Settings'),
+          //   onTap: () {},
+          // ),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),

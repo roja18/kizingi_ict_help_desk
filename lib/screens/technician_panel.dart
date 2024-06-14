@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'list_of_issues_admin.dart';
 import 'login.dart';
+import 'tech_chart_bot.dart';
 import 'tech_issue_view.dart';
 import 'tech_view_users.dart';
 import 'technician_list.dart';
@@ -112,24 +114,32 @@ class TechnicianHome extends StatelessWidget {
                             const SizedBox(
                               width: 16,
                             ),
-                            Column(
-                              children: [
-                                Card(
-                                  child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
-                                      height: 200,
-                                      width: 150,
-                                      child: Image.asset('image/smss.png')),
-                                ),
-                                const Text(
-                                  'Chart Assistance',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.lightBlue),
-                                )
-                              ],
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TechChartBot()));
+                              },
+                              child: Column(
+                                children: [
+                                  Card(
+                                    child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        height: 200,
+                                        width: 150,
+                                        child: Image.asset('image/smss.png')),
+                                  ),
+                                  const Text(
+                                    'Chart Assistance',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.lightBlue),
+                                  )
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -165,7 +175,7 @@ class TechnicianHome extends StatelessWidget {
                                     ),
                                   ),
                                   const Text(
-                                    'Technicians',
+                                    'Users',
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
